@@ -1,5 +1,5 @@
 body{
-    overflow: hidden;
+    overflow-x: hidden;
     font-family: "JetBrains Mono",monospace;
     color: #ffb563;
     font-weight: 600;

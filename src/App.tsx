@@ -8,6 +8,8 @@ import PizzaImage from './assets/pizza.png';
 import IceCreamImage from './assets/icecream.png';
 import FriesImage from './assets/fries.png';
 import JuiceImage from './assets/juice.png';
+import Order from "./Order/Order";
+import ItemsList from "./ItemsList/Items";
 
 interface Items {
     name: string,
@@ -35,8 +37,6 @@ const App = ()  => {
       {name: 'Juice', count: 0, id: nanoid(), price: 90},
   ]);
   const [price, setPrice] = useState([0]);
-
-  let priceCount: React.ReactNode;
 
   const onItemClick = (name: string, id:number) => {
       const orderCopy = [...order];
@@ -75,10 +75,6 @@ const App = ()  => {
       setOrder(orderCopy);
   };
 
-  if(order[0] === '') {
-      priceCount = <div className="total-price">Price: {price[0]} KGS</div>;
-  }
-
   const onItemDelete = (name: string, id: string) => {
       const itemsCopy = [...items];
       const priceCopy = [...price];
@@ -97,55 +93,11 @@ const App = ()  => {
       setItems(itemsCopy);
   };
 
-  const itemsDetails = items.map((item) => {
-      if(order[0] === '') {
-          if(item.count > 0) {
-              return(
-                  <div key={item.id} className="item-list">
-                      <div>
-                          {item.name}
-                          <span> x{item.count}</span>
-                          <div className="item-price"><b>{item.price} KGS</b></div>
-                      </div>
-                      <div>
-                          <button type="button" className="item-delete" onClick={() => onItemDelete(item.name, item.id)}></button>
-                      </div>
-                  </div>
-              );
-          } else {
-              return(
-                  <div className="item-hidden"></div>
-              )
-          }
-      }
-  });
-
-  const itemBtns = items.map((item, index) => {
-     return(
-         <div key={item.id}>
-             <button className="btn" onClick={() => onItemClick(item.name, index)}>
-                 <img className="btn-img" alt={item.name} src={ITEMS[index].image}/>
-                 <span>
-                     {item.name}
-                     <span className="btn-price"><b>Price: {ITEMS[index].price} KGS</b></span>
-                 </span>
-             </button>
-         </div>
-     );
-  });
 
   return (
     <div className="App">
-      <div className="order-block">
-          <h2 className="order-title">Order details:</h2>
-          {order[0]}
-          {itemsDetails}
-          {priceCount}
-      </div>
-      <div>
-          <h2 className="items-title">Add items:</h2>
-          {itemBtns}
-      </div>
+        <Order order={order[0]} items={items} onItemDelete={onItemDelete} price={price[0]}/>
+        <ItemsList items={items} onItemClick={onItemClick} itemsConst={ITEMS}/>
     </div>
   );
 };
