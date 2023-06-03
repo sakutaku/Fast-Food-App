@@ -1,38 +1,45 @@
+body{
+    font-family: "JetBrains Mono",monospace;
+    color: #ffb563;
+    font-weight: 600;
+    background-image: url("assets/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
 .App {
-  text-align: center;
+    width: 700px;
+    margin: 520px auto 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.order-title,
+.items-title{
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    text-align: center;
+}
+.btn{
+    color: #ffb563;
+    border: none;
+    margin-bottom: 10px;
+    width: 200px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    background: transparent;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.btn-img{
+    width: 80px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.btn-price{
+    display: block;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
