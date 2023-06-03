@@ -22,15 +22,45 @@ body{
 .items-title{
     margin-bottom: 40px;
     text-transform: uppercase;
+}
+
+.items-title{
     text-align: center;
 }
+.item-list{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background: #f8f4e5;
+    padding: 15px 10px;
+    border: 2px solid rgba(0,0,0,1);
+    box-shadow: 15px 15px 1px #ffb563, 15px 15px 1px 2px rgba(0,0,0,1);
+}
+.item-price{
+    font-size: 18px;
+    margin-top: 10px;
+}
+.item-delete{
+    margin-left: auto;
+    background-color: transparent;
+    background-size: contain;
+    background-image: url("assets/trash.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
 .btn{
+    font-size: 14px;
     color: #ffb563;
     border: none;
     margin-bottom: 10px;
     width: 200px;
     cursor: pointer;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     background: transparent;
 }
