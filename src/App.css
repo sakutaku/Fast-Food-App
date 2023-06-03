@@ -1,4 +1,5 @@
 body{
+    overflow: hidden;
     font-family: "JetBrains Mono",monospace;
     color: #ffb563;
     font-weight: 600;
@@ -6,7 +7,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     width: 100vw;
-    height: 100vh;
+    height: 100%;
     display: grid;
     align-items: center;
     justify-items: center;
@@ -37,6 +38,9 @@ body{
     border: 2px solid rgba(0,0,0,1);
     box-shadow: 15px 15px 1px #ffb563, 15px 15px 1px 2px rgba(0,0,0,1);
 }
+.item-hidden{
+    display: none;
+}
 .item-price{
     font-size: 18px;
     margin-top: 10px;
@@ -51,6 +55,9 @@ body{
     border: none;
     cursor: pointer;
     padding: 10px;
+}
+.total-price{
+    margin-top: 50px;
 }
 .btn{
     font-size: 14px;

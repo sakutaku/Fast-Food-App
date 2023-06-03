@@ -36,14 +36,32 @@ const App = ()  => {
   ]);
   const [price, setPrice] = useState([0]);
 
-  const onItemClick = (id:number) => {
+  let priceCount: React.ReactNode;
+
+  const onItemClick = (name: string, id:number) => {
       const orderCopy = [...order];
       orderCopy[0] = '';
 
       const itemsCopy = [...items];
       const itemsObjCopy = {...itemsCopy[id]};
 
+      const priceCopy = [...price];
+      ITEMS.map(item => {
+          if(item.name === name) {
+              priceCopy[0] = priceCopy[0] + item.price;}
+      });
 
+      itemsCopy.map(item => {
+         if(item.name === name) {
+             if(item.count === 0) {
+                 ITEMS.map(sv => {
+                     if(sv.name === name) {
+                         itemsObjCopy.price = sv.price;
+                     }
+                 })
+             }
+         }
+      });
       itemsObjCopy.count = itemsObjCopy.count + 1;
 
       if(itemsObjCopy.count > 1) {
@@ -51,11 +69,35 @@ const App = ()  => {
       }
 
       itemsCopy[id] = itemsObjCopy;
+
+      setPrice(priceCopy);
       setItems(itemsCopy);
       setOrder(orderCopy);
   };
 
-  const itemsDetails = items.map((item, index) => {
+  if(order[0] === '') {
+      priceCount = <div className="total-price">Price: {price[0]} KGS</div>;
+  }
+
+  const onItemDelete = (name: string, id: string) => {
+      const itemsCopy = [...items];
+      const priceCopy = [...price];
+      const index = items.findIndex(item => {
+          return item.id === id;
+      });
+      priceCopy[0] = priceCopy[0] - itemsCopy[index].price;
+
+      itemsCopy.map(item => {
+          if(name === item.name) {
+              item.count = 0;
+          }
+      });
+
+      setPrice(priceCopy);
+      setItems(itemsCopy);
+  };
+
+  const itemsDetails = items.map((item) => {
       if(order[0] === '') {
           if(item.count > 0) {
               return(
@@ -66,21 +108,25 @@ const App = ()  => {
                           <div className="item-price"><b>{item.price} KGS</b></div>
                       </div>
                       <div>
-                          <button type="button" className="item-delete"></button>
+                          <button type="button" className="item-delete" onClick={() => onItemDelete(item.name, item.id)}></button>
                       </div>
                   </div>
               );
+          } else {
+              return(
+                  <div className="item-hidden"></div>
+              )
           }
       }
   });
 
-  const itemBtns = items.map((ingredient, index) => {
+  const itemBtns = items.map((item, index) => {
      return(
-         <div key={ingredient.id}>
-             <button className="btn" onClick={() => onItemClick(index)}>
-                 <img className="btn-img" alt={ingredient.name} src={ITEMS[index].image}/>
+         <div key={item.id}>
+             <button className="btn" onClick={() => onItemClick(item.name, index)}>
+                 <img className="btn-img" alt={item.name} src={ITEMS[index].image}/>
                  <span>
-                     {ingredient.name}
+                     {item.name}
                      <span className="btn-price"><b>Price: {ITEMS[index].price} KGS</b></span>
                  </span>
              </button>
@@ -94,6 +140,7 @@ const App = ()  => {
           <h2 className="order-title">Order details:</h2>
           {order[0]}
           {itemsDetails}
+          {priceCount}
       </div>
       <div>
           <h2 className="items-title">Add items:</h2>
